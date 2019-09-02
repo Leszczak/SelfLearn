@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace DiningPhilosophers
@@ -46,6 +47,56 @@ namespace DiningPhilosophers
                 t.Join();
             watcher.IsStop = true;
             watcherTread.Join();
+        }
+        /// <summary>
+        /// Used with command lines arguments input for simpler parsing.
+        /// Creates appropriate DiningPhilosophersRunner instance and runs it.
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
+        public static void Starter(string[] args)
+        {
+            int philosophersNumber = 5;
+            int iterationsNumber = 5;
+            switch (args.Length)
+            {
+                default:
+                    Console.WriteLine("Wrong arguments. Write -help for help.");
+                    return;
+                case 2:
+                    try
+                    {
+                        iterationsNumber = int.Parse(args[1]);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Wrong arguments. Write -help for help.");
+                        return;
+                    }
+                    goto case 1;
+                case 1:
+                    if (args[0].Equals("-help"))
+                    {
+                        Console.WriteLine("Non argument call defaults number of philosophers and iterations to 5.\n" +
+                                            "First argument (int) sets number of philosophers.\n" +
+                                            "Second argument (int) sets number of iterations.");
+                        return;
+                    }
+                    else
+                        try
+                        {
+                            philosophersNumber = int.Parse(args[0]);
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Wrong arguments. Write -help for help.");
+                            return;
+                        }
+                    break;
+                case 0:
+                    break;
+
+            }
+            new DiningPhilosophersRunner(3, 5).Run();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 
 namespace DiningPhilosophers
@@ -22,8 +21,11 @@ namespace DiningPhilosophers
             this.chopsticks = chopsticks;
             this. philosophers = philosophers;
             IsStop = false;
-            Interval = 5;
+            Interval = 1;
         }
+        /// <summary>
+        /// Starts displaying information in set intervals till ISStop is true.
+        /// </summary>
         public void StartDisplaying()
         {
             while(!IsStop)
