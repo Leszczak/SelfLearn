@@ -39,8 +39,13 @@ namespace DiningPhilosophers
                 threads.Add(new Thread(new ParameterizedThreadStart(p.Live)));
             foreach (Thread t in threads)
                 t.Start(numberOfRuns);
+            Watcher watcher = new Watcher(chopsticks, philosophers);
+            Thread watcherTread = new Thread(new ThreadStart(watcher.StartDisplaying));
+            watcherTread.Start();
             foreach (Thread t in threads)
                 t.Join();
+            watcher.IsStop = true;
+            watcherTread.Join();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace DiningPhilosophers
             IsRighthanded = isRighthanded;
         }
         Dictionary<int, string> Chopsticks;
-        int Number;
+        public int Number { get; private set; }
         public bool IsRighthanded { get; set; }
     }
 }

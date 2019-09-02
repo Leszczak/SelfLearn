@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace DiningPhilosophers
 {
@@ -21,16 +22,22 @@ namespace DiningPhilosophers
         }
         public void Live(object iterationsCount)
         {
-            int iterations = (int)iterationsCount;
-            while (iterations == -1 || iterations-- > 0)
+            int iterations = (int) iterationsCount;
+            while (iterations-- > 0)
             {
-                State = "Live" + iterations;
-                Console.WriteLine(State);
+                Eat();
+                Think();
             }
         }
-        public void Live()
+        private void Eat()
         {
-            Live(-1);
+            State = "Eating";
+            Thread.Sleep(3000);
+        }
+        private void Think()
+        {
+            State = "Thinking";
+            Thread.Sleep(3000);
         }
     }
 }
